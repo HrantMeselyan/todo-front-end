@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TodoService} from "../todo.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {NgForm} from "@angular/forms";
 import {TodoDto} from "../model/todo";
 import {Category} from "../model/category";
 import {CategoryService} from "./category.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
     selector: 'app-main',
@@ -20,12 +20,9 @@ export class MainComponent implements OnInit {
     constructor(private categoryService: CategoryService, private todoService: TodoService) {
     }
 
-    ngOnInit(): void {
-        this.todoService.getToDos().subscribe(todos => {
-            this.toDo = todos;
-            this.getCategories();
-        });
-
+    ngOnInit() {
+        this.getToDos()
+        this.getCategories()
     }
 
     public getCategories(): void {
@@ -52,6 +49,23 @@ export class MainComponent implements OnInit {
         );
     }
 
+
+  public onAddToDo(addForm: NgForm): void {
+    // @ts-ignore
+    document.getElementById('add-ToDo-form').click();
+    this.todoService.addTodo(addForm.value).subscribe(
+      (response: TodoDto) => {
+        console.log(response);
+        this.getToDos();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        addForm.reset();
+      }
+    );
+    this.getToDos();
+    addForm.reset();
+  }
 
     public onUpdateToDo(toDo: TodoDto): void {
         this.todoService.update(toDo).subscribe(

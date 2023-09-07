@@ -1,6 +1,6 @@
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {environment} from "./environment";
 import {TodoDto} from "./model/todo";
 
@@ -8,8 +8,6 @@ import {TodoDto} from "./model/todo";
     providedIn: 'root'
 })
 export class TodoService {
-    private todos: TodoDto[] = [];
-    private todoSubject = new BehaviorSubject<TodoDto[]>([]);
 
     private apiServerUrl = environment.apiBaseUrl;
 
@@ -21,8 +19,8 @@ export class TodoService {
     }
 
 
-    public getToDos(): Observable<any> {
-        return this.http.get<any>(`${this.apiServerUrl}/todo`);
+    public getToDos(): Observable<TodoDto[]> {
+        return this.http.get<TodoDto[]>(`${this.apiServerUrl}/todo`);
     }
 
     public getById(todoId: number): Observable<TodoDto> {

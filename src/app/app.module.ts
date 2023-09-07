@@ -8,26 +8,29 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {MainComponent} from "./main/main.component";
-import {HeaderComponent} from './layouts/header/header.component';
 import {AngularEditorModule} from "@kolkov/angular-editor";
+import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        MainComponent,
-        HeaderComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        AngularEditorModule,
-        ReactiveFormsModule
+  declarations: [
+    AppComponent,
+    MainComponent,
+    RegistrationComponent,
+    LoginComponent,
 
-    ],
-    providers: [TodoService],
-    bootstrap: [AppComponent]
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    AngularEditorModule,
+    ReactiveFormsModule
+
+  ],
+  providers: [TodoService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
